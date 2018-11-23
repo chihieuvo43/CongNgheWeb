@@ -1,0 +1,114 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_Course
+
+@{
+    ViewBag.Title = "DetailCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container pt-2" style="background-color:#ffffff">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <a href="#">Trở lại trang danh sách</a>
+            <hr />
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-6">
+          <img src="@Url.Content("~/Images/Courses/"+Model.CourseImage)"  class="img-thumbnail" width="500px"/>
+        </div>
+        <div class="col-md-6">
+            <p>@Model.CourseName</p>
+            <hr />
+            <p>Hiện tại có @Model.TotalStudents và @Model.TotalView lượt xem</p>
+            <p>
+                <strong>Học phí: </strong>
+                @if (Model.Pirce == null)
+                {
+                    <span>Miễn phí</span>
+                }
+                else
+                {
+                    <span>@string.Format("{0:0,0 VNĐ}", Model.Pirce)</span>
+                }
+            </p>
+            <hr />
+            @{
+                if (Model.tbl_Lession.Count() == 0)
+                {
+                    <button class="btn btn-primary">Khóa học đang được cập nhật</button>
+                }
+                else
+                {
+                    <button class="btn btn-primary">Đăng nhập để học</button>
+                    <button class="btn btn-primary">Xem video giới thiệu</button>
+                }
+            }
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Review" role="tab" aria-controls="Review" aria-selected="true">Tổng quan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#Containt" role="tab" aria-controls="Containt" aria-selected="false">Nội dụng bài học</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Teacher" role="tab" aria-controls="Teacher" aria-selected="false">Giảng viên</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#Comment" role="tab" aria-controls="Comment" aria-selected="false">Đánh giá</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active p-3" id="Review" role="tabpanel" aria-labelledby="home-tab">
+                    <p>@Model.CourseName</p>
+                    <p class="text-justify">@Html.Raw(Model.CourseDescription)</p>
+
+                </div>
+                <div class="tab-pane fade" id="Containt" role="tabpanel" aria-labelledby="profile-tab">
+                    <table class="table table-bordered mt-2">
+                        <thead>
+                            <tr>
+                                <td>Số thứ tự</td>
+                                <td>Tên bài học</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 1;
+                                var ListLession = Model.tbl_Lession.OrderBy(x=>x.LessionName);
+                                foreach (var item in ListLession)
+                                {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.LessionName</td>
+                                    </tr>
+                                    i++;
+                                }
+
+                            }
+
+                        </tbody>
+                    </table>
+                  
+                </div>
+                <div class="tab-pane fade" id="Teacher" role="tabpanel" aria-labelledby="contact-tab">
+                    <p style="color:cornflowerblue">Thông tin giảng viên</p>
+                    <p>Họ tên: <strong>@Model.tbl_User.UserName</strong></p>
+                    <span>Ảnh: </span>
+                    <p>Mô tả</p>
+                    <p>@Html.Raw(Model.tbl_User.DescriptionUser)</p>
+                </div>
+                <div class="tab-pane fade" id="Comment" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

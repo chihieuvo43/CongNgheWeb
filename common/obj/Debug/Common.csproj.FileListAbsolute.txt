@@ -1,0 +1,5 @@
+D:\ASP.NET\Cong nghe web\Demo\CongNgheWeb_3_0\Common\bin\Debug\Common.dll
+D:\ASP.NET\Cong nghe web\Demo\CongNgheWeb_3_0\Common\bin\Debug\Common.pdb
+D:\ASP.NET\Cong nghe web\Demo\CongNgheWeb_3_0\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+D:\ASP.NET\Cong nghe web\Demo\CongNgheWeb_3_0\Common\obj\Debug\Common.dll
+D:\ASP.NET\Cong nghe web\Demo\CongNgheWeb_3_0\Common\obj\Debug\Common.pdb

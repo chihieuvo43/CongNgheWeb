@@ -1,0 +1,115 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_Course
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Course")">Các khóa học</a></li>
+    <li class="breadcrumb-item">Sửa khóa học <strong></strong> </li>
+</ol>
+<!--grid-->
+<div class="agileinfo-grap text-center">
+    <div class="agileits-box">
+        <div class="agileits-box-body clearfix text-left">
+            @using (Html.BeginForm("Edit", "Course", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.CreateDate)
+                @Html.HiddenFor(model => model.TotalStudents)
+                @Html.HiddenFor(model => model.TotalView)
+                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.CourseImage)
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CourseImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <img src="@Url.Content("~/Images/Courses/"+ Model.CourseImage)" />
+                        <input type="file" name="CourseImage" />
+                        @Html.ValidationMessageFor(model => model.CourseImage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CategoryID")
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Pirce, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Pirce, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Pirce, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+               
+              
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.censored, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.censored)
+                        </div>
+
+                    </div>
+
+                </div>
+              
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CourseDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.CourseDescription, new { htmlAttributes = new { @class = "form-control" } })
+                        <script type="text/javascript" language="javascript">
+                            CKEDITOR.replace(@Html.IdFor(model => model.CourseDescription));
+                        </script>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Lưu" class="btn btn-danger" />
+                        <a class="btn btn-primary" href="@Url.Action("Index","Course")">Về danh sách</a>
+                        @ViewBag.Status
+                    </div>
+                </div>
+
+            </div>
+            }
+
+        </div>
+    </div>
+</div>

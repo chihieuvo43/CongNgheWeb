@@ -1,0 +1,157 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_Course
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Course")">Các khóa học</a></li>
+    <li class="breadcrumb-item">Chi tiết khóa học <strong>@Model.CourseName</strong> </li>
+</ol>
+<!--grid-->
+
+<div class="agileinfo-grap text-center">
+    <div class="agileits-box">
+        <div class="agileits-box-body clearfix text-left">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CourseImage)
+                        </dt>
+
+                        <dd>
+                            <img src="@Url.Content("~/Images/Courses/"+Model.CourseImage)" width="200px"/>
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CreateDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CreateDate)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Pirce)
+                        </dt>
+
+                        <dd>
+                            @if (Model.Pirce == null)
+                            {
+                                <span class="badge badge-success">Miễn phí</span>
+                            }
+                            else
+                            {
+                                @Html.FormatValue(Model.Pirce, "{0:0,0 VNĐ}")
+                            }
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TotalView)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TotalView)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TotalStudents)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TotalStudents)
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CourseName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CourseName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.tbl_User.UserName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.tbl_User.UserName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Discount)
+                        </dt>
+
+                        <dd>
+
+                            @if (Model.Discount == null)
+                            {
+                                <span class="badge badge-success">Không</span>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => Model.Discount)
+                            }
+                        </dd>
+
+
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.censored)
+                        </dt>
+
+                        <dd>
+                            @if (Model.censored == true)
+                            {
+                                <span class="badge badge-success">Đã duyệt</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">Chưa duyệt</span>
+                            }
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.tbl_Category.CategoryName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.tbl_Category.CategoryName)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model=>model.CourseDescription)
+                </dt>
+
+                <dd>
+                    @Html.Raw(Model.CourseDescription)
+                </dd>
+            </dl>
+        </div>
+        <footer>
+            @using (Html.BeginForm())
+            {
+                <a class="btn btn-danger" href="@Url.Action("Edit", "Course",new {@id=Model.ID })">
+                    Sửa
+                </a>
+
+                <a class="btn btn-primary" href="@Url.Action("Index", "Course")">
+                    Về danh sách
+                </a>
+            }
+
+
+        </footer>
+    </div>
+</div>

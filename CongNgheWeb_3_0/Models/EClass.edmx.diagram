@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="74891b3f5a9d496f8606d36567046cc4" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="E_ClassModel.tbl_Category" Width="1.5" PointX="5.5" PointY="5.625" />
+        <EntityTypeShape EntityType="E_ClassModel.tbl_Course" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="E_ClassModel.tbl_Lession" Width="1.5" PointX="5" PointY="1.625" />
+        <EntityTypeShape EntityType="E_ClassModel.tbl_Menu" Width="1.5" PointX="0.5" PointY="6.875" />
+        <EntityTypeShape EntityType="E_ClassModel.tbl_Position" Width="1.5" PointX="0.5" PointY="5.125" />
+        <EntityTypeShape EntityType="E_ClassModel.tbl_Poster" Width="1.5" PointX="7.5" PointY="0.5" />
+        <EntityTypeShape EntityType="E_ClassModel.tbl_Slide" Width="1.5" PointX="4.5" PointY="8.5" />
+        <EntityTypeShape EntityType="E_ClassModel.tbl_Sort_Course" Width="1.5" PointX="7.75" PointY="5.625" />
+        <EntityTypeShape EntityType="E_ClassModel.tbl_User" Width="1.5" PointX="0.5" PointY="0.875" />
+        <AssociationConnector Association="E_ClassModel.fk_SortCourse_Category" />
+        <AssociationConnector Association="E_ClassModel.FK_Course_Menu" />
+        <AssociationConnector Association="E_ClassModel.FK_Course_User" />
+        <AssociationConnector Association="E_ClassModel.FK_Lession_Course" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

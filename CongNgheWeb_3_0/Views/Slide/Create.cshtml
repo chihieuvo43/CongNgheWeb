@@ -1,0 +1,46 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_Slide
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Slide")">Danh sách ảnh slide</a></li>
+    <li class="breadcrumb-item"><a href="#">Thêm ảnh vào slide</a></li>
+
+</ol>
+<div class="agileinfo-grap">
+    <div class="grid-form">
+        <div class="grid-form1">
+            <h2 id="forms-example" class="">Thêm ảnh vào slide</h2>
+            @using (Html.BeginForm("Create", "Slide", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SildeImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" name="SlideImage" />
+
+                            @Html.ValidationMessageFor(model => model.SildeImage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Thêm ảnh" class="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+</div>

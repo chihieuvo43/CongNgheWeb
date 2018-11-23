@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="E_ClassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Icon" Type="varchar" MaxLength="100" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Course">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CourseImage" Type="nvarchar" MaxLength="255" />
+          <Property Name="Pirce" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="Discount" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="TotalView" Type="int" />
+          <Property Name="TotalStudents" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="censored" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CourseDescription" Type="ntext" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="SortCourseID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Lession">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LessionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="URLLession" Type="text" />
+          <Property Name="TotalTime" Type="int" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Icon" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Poster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImagePoster" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Clock" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Slide">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SildeImage" Type="nvarchar" MaxLength="100" />
+          <Property Name="Clock" Type="bit" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Sort_Course">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="SortCourseName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserImage" Type="varchar" MaxLength="100" />
+          <Property Name="LoginName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PasswordUser" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="DescriptionUser" Type="text" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="NumberPhone" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Clock" Type="bit" />
+          <Property Name="Position" Type="int" />
+          <Property Name="SendMail" Type="bit" />
+          <Property Name="Notificationed" Type="bit" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Course_Menu">
+          <End Role="tbl_Menu" Type="Self.tbl_Menu" Multiplicity="0..1" />
+          <End Role="tbl_Course" Type="Self.tbl_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Course">
+              <PropertyRef Name="SortCourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_User">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="0..1" />
+          <End Role="tbl_Course" Type="Self.tbl_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Course">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lession_Course">
+          <End Role="tbl_Course" Type="Self.tbl_Course" Multiplicity="0..1" />
+          <End Role="tbl_Lession" Type="Self.tbl_Lession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Course">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Lession">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SortCourse_Category">
+          <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
+          <End Role="tbl_Sort_Course" Type="Self.tbl_Sort_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Sort_Course">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="E_ClassModelStoreContainer">
+          <EntitySet Name="tbl_Category" EntityType="Self.tbl_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Course" EntityType="Self.tbl_Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Lession" EntityType="Self.tbl_Lession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Position" EntityType="Self.tbl_Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Poster" EntityType="Self.tbl_Poster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Slide" EntityType="Self.tbl_Slide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Sort_Course" EntityType="Self.tbl_Sort_Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Course_Menu" Association="Self.FK_Course_Menu">
+            <End Role="tbl_Menu" EntitySet="tbl_Menu" />
+            <End Role="tbl_Course" EntitySet="tbl_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_User" Association="Self.FK_Course_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Course" EntitySet="tbl_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lession_Course" Association="Self.FK_Lession_Course">
+            <End Role="tbl_Course" EntitySet="tbl_Course" />
+            <End Role="tbl_Lession" EntitySet="tbl_Lession" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SortCourse_Category" Association="Self.fk_SortCourse_Category">
+            <End Role="tbl_Category" EntitySet="tbl_Category" />
+            <End Role="tbl_Sort_Course" EntitySet="tbl_Sort_Course" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="E_ClassModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="E_ClassEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Category" EntityType="E_ClassModel.tbl_Category" />
+          <EntitySet Name="tbl_Course" EntityType="E_ClassModel.tbl_Course" />
+          <EntitySet Name="tbl_Lession" EntityType="E_ClassModel.tbl_Lession" />
+          <EntitySet Name="tbl_Menu" EntityType="E_ClassModel.tbl_Menu" />
+          <EntitySet Name="tbl_Position" EntityType="E_ClassModel.tbl_Position" />
+          <EntitySet Name="tbl_Poster" EntityType="E_ClassModel.tbl_Poster" />
+          <EntitySet Name="tbl_Slide" EntityType="E_ClassModel.tbl_Slide" />
+          <EntitySet Name="tbl_Sort_Course" EntityType="E_ClassModel.tbl_Sort_Course" />
+          <EntitySet Name="tbl_User" EntityType="E_ClassModel.tbl_User" />
+          <AssociationSet Name="fk_SortCourse_Category" Association="E_ClassModel.fk_SortCourse_Category">
+            <End Role="tbl_Category" EntitySet="tbl_Category" />
+            <End Role="tbl_Sort_Course" EntitySet="tbl_Sort_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Menu" Association="E_ClassModel.FK_Course_Menu">
+            <End Role="tbl_Menu" EntitySet="tbl_Menu" />
+            <End Role="tbl_Course" EntitySet="tbl_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_User" Association="E_ClassModel.FK_Course_User">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="tbl_Course" EntitySet="tbl_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lession_Course" Association="E_ClassModel.FK_Lession_Course">
+            <End Role="tbl_Course" EntitySet="tbl_Course" />
+            <End Role="tbl_Lession" EntitySet="tbl_Lession" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="tbl_Sort_Course" Relationship="E_ClassModel.fk_SortCourse_Category" FromRole="tbl_Category" ToRole="tbl_Sort_Course" />
+        </EntityType>
+        <EntityType Name="tbl_Course">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CourseImage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Pirce" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalView" Type="Int32" />
+          <Property Name="TotalStudents" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="censored" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CourseDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="SortCourseID" Type="Int32" />
+          <NavigationProperty Name="tbl_Menu" Relationship="E_ClassModel.FK_Course_Menu" FromRole="tbl_Course" ToRole="tbl_Menu" />
+          <NavigationProperty Name="tbl_User" Relationship="E_ClassModel.FK_Course_User" FromRole="tbl_Course" ToRole="tbl_User" />
+          <NavigationProperty Name="tbl_Lession" Relationship="E_ClassModel.FK_Lession_Course" FromRole="tbl_Course" ToRole="tbl_Lession" />
+        </EntityType>
+        <EntityType Name="tbl_Lession">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LessionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="URLLession" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TotalTime" Type="Int32" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="tbl_Course" Relationship="E_ClassModel.FK_Lession_Course" FromRole="tbl_Lession" ToRole="tbl_Course" />
+        </EntityType>
+        <EntityType Name="tbl_Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Course" Relationship="E_ClassModel.FK_Course_Menu" FromRole="tbl_Menu" ToRole="tbl_Course" />
+        </EntityType>
+        <EntityType Name="tbl_Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_Poster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImagePoster" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Clock" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Slide">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SildeImage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Clock" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_Sort_Course">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="SortCourseName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="tbl_Category" Relationship="E_ClassModel.fk_SortCourse_Category" FromRole="tbl_Sort_Course" ToRole="tbl_Category" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordUser" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="NumberPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Clock" Type="Boolean" />
+          <Property Name="Position" Type="Int32" />
+          <Property Name="SendMail" Type="Boolean" />
+          <Property Name="Notificationed" Type="Boolean" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="tbl_Course" Relationship="E_ClassModel.FK_Course_User" FromRole="tbl_User" ToRole="tbl_Course" />
+        </EntityType>
+        <Association Name="fk_SortCourse_Category">
+          <End Type="E_ClassModel.tbl_Category" Role="tbl_Category" Multiplicity="0..1" />
+          <End Type="E_ClassModel.tbl_Sort_Course" Role="tbl_Sort_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Sort_Course">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Menu">
+          <End Type="E_ClassModel.tbl_Menu" Role="tbl_Menu" Multiplicity="0..1" />
+          <End Type="E_ClassModel.tbl_Course" Role="tbl_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Course">
+              <PropertyRef Name="SortCourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_User">
+          <End Type="E_ClassModel.tbl_User" Role="tbl_User" Multiplicity="0..1" />
+          <End Type="E_ClassModel.tbl_Course" Role="tbl_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Course">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lession_Course">
+          <End Type="E_ClassModel.tbl_Course" Role="tbl_Course" Multiplicity="0..1" />
+          <End Type="E_ClassModel.tbl_Lession" Role="tbl_Lession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Course">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbl_Lession">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="E_ClassModelStoreContainer" CdmEntityContainer="E_ClassEntities">
+          <EntitySetMapping Name="tbl_Category">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_Category">
+              <MappingFragment StoreEntitySet="tbl_Category">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Course">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_Course">
+              <MappingFragment StoreEntitySet="tbl_Course">
+                <ScalarProperty Name="SortCourseID" ColumnName="SortCourseID" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CourseDescription" ColumnName="CourseDescription" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="censored" ColumnName="censored" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TotalStudents" ColumnName="TotalStudents" />
+                <ScalarProperty Name="TotalView" ColumnName="TotalView" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Pirce" ColumnName="Pirce" />
+                <ScalarProperty Name="CourseImage" ColumnName="CourseImage" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Lession">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_Lession">
+              <MappingFragment StoreEntitySet="tbl_Lession">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+                <ScalarProperty Name="URLLession" ColumnName="URLLession" />
+                <ScalarProperty Name="LessionName" ColumnName="LessionName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Menu">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_Menu">
+              <MappingFragment StoreEntitySet="tbl_Menu">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Position">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_Position">
+              <MappingFragment StoreEntitySet="tbl_Position">
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Poster">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_Poster">
+              <MappingFragment StoreEntitySet="tbl_Poster">
+                <ScalarProperty Name="Clock" ColumnName="Clock" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ImagePoster" ColumnName="ImagePoster" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Slide">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_Slide">
+              <MappingFragment StoreEntitySet="tbl_Slide">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Clock" ColumnName="Clock" />
+                <ScalarProperty Name="SildeImage" ColumnName="SildeImage" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Sort_Course">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_Sort_Course">
+              <MappingFragment StoreEntitySet="tbl_Sort_Course">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="SortCourseName" ColumnName="SortCourseName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User">
+            <EntityTypeMapping TypeName="E_ClassModel.tbl_User">
+              <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Notificationed" ColumnName="Notificationed" />
+                <ScalarProperty Name="SendMail" ColumnName="SendMail" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Clock" ColumnName="Clock" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NumberPhone" ColumnName="NumberPhone" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DescriptionUser" ColumnName="DescriptionUser" />
+                <ScalarProperty Name="PasswordUser" ColumnName="PasswordUser" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

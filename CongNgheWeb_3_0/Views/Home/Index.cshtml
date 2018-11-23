@@ -1,0 +1,77 @@
+﻿@using CongNgheWeb_3_0.Models
+@{ IEnumerable<tbl_Course> ListCourse = (IEnumerable<tbl_Course>)ViewBag.ListCourse;}
+@{ IEnumerable<tbl_Course> ListNew = (IEnumerable<tbl_Course>)ViewBag.ListNew;}
+@{ IEnumerable<tbl_Slide> ListSilde = (IEnumerable<tbl_Slide>)ViewBag.ListSilde;}
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@Html.Action("Show", "Poster")
+
+<!---->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" style="height:7px; background:#DF322F;"></div>
+    </div>
+</div>
+<div class="jumbotron jumbotron-fluid  bg-light" id="jumbotron">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-1">
+                <i class="fa fa-youtube-play fa-4x" style="color:#DF322F;"></i>
+            </div>
+            <div class="col-md-2">
+
+                <strong>1000+</strong>
+                <p>khóa học</p>
+            </div>
+            <div class="col-md-1 mt-2">
+                <i class="fa fa-ellipsis-v fa-3x" style="color:#808080; opacity:.5;"></i>
+            </div>
+            <div class="col-md-1">
+                <i class="fa fa-users fa-4x" style="color:#DF322F;"></i>
+            </div>
+            <div class="col-md-2">
+                <strong>100.000+</strong>
+                <p>Học viên</p>
+            </div>
+            <div class="col-md-1 mt-2">
+                <i class="fa fa-ellipsis-v fa-3x" style="color:#808080; opacity:.5;"></i>
+            </div>
+            <div class="col-md-1">
+                <i class="fa fa-bookmark fa-4x" style="color:#DF322F;"></i>
+            </div>
+            <div class="col-md-2">
+                <strong>1000+</strong>
+                <p>Giảng viên</p>
+            </div>
+        </div>
+    </div>
+</div>
+@* Slide *@
+
+
+
+@Html.Partial("ShowSlide", ListSilde)
+
+@* Slide *@
+
+
+@Html.Partial("_PartialFreeCourse", ListCourse)
+@Html.Partial("_PartialNewCourse", ListNew)
+<style>
+    #jumbotron {
+        padding: 10px 0px;
+        margin-bottom: 0px;
+    }
+</style>
+<script>
+    $('.carousel').carousel({
+        interval: 1000
+    })
+</script>

@@ -1,0 +1,95 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_User
+
+@{
+    ViewBag.Title = "CreateTeacher";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListTeacher","Admin")">Danh sách giảng viên</a></li>
+    <li class="breadcrumb-item active"><a href="@Url.Action("CreateTeacher","User")">Tạo tài khoản giảng viên</a></li>
+</ol>
+<!--grid-->
+<div class="grid-form">
+    <div class="grid-form1">
+        <h2 id="forms-example" class="">Tạo tài khoản cho giảng viên</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model=>model.Email,new { @class="form-control"})
+                    @*<input type="text" class="form-control" name="UserName"/>*@
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                    @*<input type="text" class="form-control" name="Email" />*@
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+          
+            @*<div class="form-group form-inline">
+                @Html.Label("Tạo mật khẩu thủ công: ", new { @class = "control-label col-md-3" })
+                <input type="checkbox" class="form-control col-md-9" id="PasswordManual"  href="#collapseExample" />
+            </div>
+            <div class="form-group" id="password" style="display:none;">
+                @Html.Label("Mật khẩu", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group" id="Confirmpassword" style="display:none;">
+                @Html.Label("Xác nhận mật khẩu", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" class="form-control" />
+                </div>
+            </div>*@
+
+            <div class="form-group ">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Tạo tài khoản" formaction="@Url.Action("CreateUserDontSendMail","User")" formmethod="post" class="btn btn-primary" />
+                    <input type="submit" value="Tạo tài khoản và gởi mail" formaction="@Url.Action("CreateUserAndSendMail","User")" class="btn btn-danger" />
+                    <br />
+                    <span class="text-danger"> @ViewBag.Status</span>
+                   
+                </div>
+            </div>
+        </div>
+
+
+            }
+
+        </div>
+</div>
+
+
+<script language="javascript">
+    $(document).ready(function () {
+       
+        $('#PasswordManual').click(function () {
+            if ($(this).prop("checked") == true) {
+                document.getElementById("password").style.display = "block";
+                document.getElementById("Confirmpassword").style.display = "block";
+            }
+            else if ($(this).prop("checked") == false) {
+                document.getElementById("password").style.display = "none";
+                document.getElementById("Confirmpassword").style.display = "none";
+            }
+        });
+    });
+</script>

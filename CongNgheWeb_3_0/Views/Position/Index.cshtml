@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CongNgheWeb_3_0.Models.tbl_Position>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<!-- tables -->
+<link href="~/Content/Admin/css/table-style.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/Admin/css/basictable.css" />
+<script type="text/javascript" src="~/Content/Admin/js/jquery.basictable.min.js"></script>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Position")">Các chức vụ</a></li>
+</ol>
+<!-- //tables -->
+
+<div class="agile-grids">
+    <div class="agile-tables">
+
+        <div class="w3l-table-info">
+            <h2>Danh sách chức vụ</h2>
+            <a class="btn btn-danger" href="@Url.Action("Create","Position")"><i class="fa fa-plus"></i> Thêm chức vụ</a>
+            <table id="table" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(Model => Model.PositionName)</th>
+                        <th width="10%">Sửa</th>
+                        <th width="10%">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.PositionName</td>
+
+
+                            <td>
+                                <a href="@Url.Action("Edit","Position",new {@id=item.ID})"><i class="fa fa-gear fa-1x"></i></a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Delete","Position",new {@id=item.ID}) "><i class="fa fa-times-circle-o fa-1x"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!--js -->
+<script src="~/Content/Admin/js/jquery.nicescroll.js"></script>
+<script src="~/Content/Admin/js/scripts.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="~/Content/Admin/js/bootstrap.min.js"></script>
+
+

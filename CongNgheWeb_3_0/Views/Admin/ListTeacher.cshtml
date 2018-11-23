@@ -1,0 +1,114 @@
+﻿@model IEnumerable<CongNgheWeb_3_0.Models.tbl_User>
+@{
+    ViewBag.Title = "ListTeacher";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!-- tables -->
+<link href="~/Content/Admin/css/table-style.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/Admin/css/basictable.css" />
+<script type="text/javascript" src="~/Content/Admin/js/jquery.basictable.min.js"></script>
+
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListTeacher","Admin")">Danh sách giảng viên</a></li>
+</ol>
+<!-- //tables -->
+
+<div class="agile-grids">
+    <div class="agile-tables">
+
+        <div class="w3l-table-info">
+            <h2>Danh sách giảng viên</h2>
+            <a class="btn btn-danger" href="@Url.Action("CreateTeacher","User")">Thêm giảng viên</a>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Stt</th>
+                        <th>@Html.DisplayNameFor(Model => Model.UserName)</th>
+                        <th>@Html.DisplayNameFor(Model => Model.UserImage)</th>
+                        <th>@Html.DisplayNameFor(Model => Model.Email)</th>
+                        <th>@Html.DisplayNameFor(Model => Model.NumberPhone)</th>
+                        <th>@Html.DisplayNameFor(Model => Model.SendMail)</th>
+                        <th>@Html.DisplayNameFor(Model => Model.Clock)</th>
+                        <th width="5%">Chi tiết</th>
+                        <th width="5%">Sửa</th>
+                        <th width="5%">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+
+                        int i=1;
+                        foreach (var item in Model)
+                        {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.UserName</td>
+                        <td>@item.UserImage</td>
+                        <td>@item.Email</td>
+                        <td>
+                            @if (item.NumberPhone == null)
+                            {
+                                <span class="badge badge-primary">Chưa cập nhật</span>
+                            }
+                            else
+                            {
+                                @item.NumberPhone
+                            }
+                        </td>
+                        <td>
+                            @if (item.SendMail == true)
+                            {
+                                <span class="badge badge-primary">Đã gởi mail</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">Chưa gởi mail</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.Clock == true)
+                            {
+                                <a href="@Url.Action("ClockAndUnClock","User",new {@id=item.ID})"><i class="fa fa-times text-danger"></i></a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("ClockAndUnClock","User",new {@id=item.ID})"><i class="fa fa-check text-primary"></i></a>
+
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Detail","User",new {@id=item.ID})"><i class="fa fa-info-circle fa-2x" style="color: #808080;"></i></a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit","User",new {@id=item.ID})"><i class="fa fa-edit fa-2x" style="color: #808080;"></i></a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Delete","User",new {@id=item.ID}) "><i class="fa fa-trash-o fa-2x" style="color: #808080;"></i></a>
+                        </td>
+                    </tr>
+                            i++;
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!--js -->
+<script src="~/Content/Admin/js/jquery.nicescroll.js"></script>
+<script src="~/Content/Admin/js/scripts.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="~/Content/Admin/js/bootstrap.min.js"></script>

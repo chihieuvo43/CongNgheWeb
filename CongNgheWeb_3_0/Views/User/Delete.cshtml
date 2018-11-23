@@ -1,0 +1,79 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_User
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListTeacher","Admin")">Danh sách giảng viên</a></li>
+    <li class="breadcrumb-item">Xóa giảng viên : @Model.UserName</li>
+</ol>
+<div class="agileinfo-grap text-center">
+    <div class="agileits-box">
+        <header class="agileits-box-header clearfix mt-3">
+            <h3>Xóa Giảng viên <strong>@Model.UserName</strong></h3>
+        </header>
+        <div class="agileits-box-body clearfix text-left m-3">
+            <h4>Thông tin</h4>
+            <p>
+                <strong>Số điện thoại: </strong>
+                @if (@Model.NumberPhone == null)
+                {
+                    <span class="badge badge-primary">Chưa cập nhật</span>
+                }
+                else
+                {
+                    @Model.NumberPhone
+                }
+            </p>
+            <p><strong>Email: </strong>@Model.Email</p>
+            <p>
+                <strong>Chức vụ: </strong>
+                @if (Model.Position == 1)
+                {
+                    <span>Quản lý</span>
+                }
+                else if (Model.Position == 2)
+                {
+                    <span>Nhân viên</span>
+                }
+                else if (Model.Position == 3)
+                {
+                    <span>Giảng viên</span>
+                }
+                else
+                {
+                    <span>Học viên</span>
+                }
+            </p>
+            <p>
+                <strong>Trạng thái: </strong>
+                @if (Model.Clock == true)
+                {
+                    <span class="badge badge-danger">Đã khóa</span>
+                }
+                else
+                {
+                    <span class="badge badge-success">Đang hoạt động</span>
+                }
+            </p>
+        </div>
+        <footer class="m-3">
+            @using (Html.BeginForm())
+            {
+                <input type="submit" class="btn btn-danger" value="Đồng ý" />
+
+                <a class="btn btn-success" href="@Url.Action("Edit", "User")">
+                    Sửa
+                </a>
+
+                <a class="btn btn-primary" href="@Url.Action("ListTeacher", "Admin")">
+                    Về danh sách
+                </a>
+            }
+
+
+        </footer>
+    </div>
+</div>
+

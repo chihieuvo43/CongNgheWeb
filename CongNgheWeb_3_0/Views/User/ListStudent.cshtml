@@ -1,0 +1,100 @@
+﻿@using PagedList.Mvc
+@using CongNgheWeb_3_0.Models
+
+@model PagedList.PagedList<tbl_User>
+
+@{
+    ViewBag.Title = "ListStudent";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListStudent","User")">Danh sách học viên</a></li>
+</ol>
+<!--grid-->
+<!-- //tables -->
+
+<div class="agile-grids">
+    <div class="agile-tables">
+
+        <div class="w3l-table-info">
+            <h2>Danh sách các khóa học</h2>
+            <br />
+            <a class="btn btn-danger" href="@Url.Action("CreateStudent","User")"><i class="fa fa-plus"></i> Thêm học viên</a>
+            <table id="table" class="table table-hover table-bordered" style="color:#000;">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().CreateDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().NumberPhone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Clock)
+                        </th>
+                        <th width="5%">Chi tiết</th>
+                        <th width="5%">Xóa</th>
+                    </tr>
+
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                     <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumberPhone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @if (item.Clock == true)
+                                {
+                                    <a href="@Url.Action("LockStudent", "User", new {item.ID})">
+                                        <span class="badge badge-danger"><i class="fa fa-check fa-2x" style="color:#fff;"></i> Đã khóa </span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("LockStudent", "User", new {item.ID})">
+                                        <span class="badge badge-primary"><i class="fa fa-remove fa-2x" style="color:#fff;"></i> Hoạt động</span>
+                                    </a>
+
+                                }
+                            </td>
+                            <td>
+                                <a href="@Url.Action("DetailsStudent","User",new {@id=item.ID})"><i class="fa fa-info-circle fa-2x" style="color: #808080;"></i></a>
+                            </td>
+
+                            
+                            <td>
+                                <a href="@Url.Action("DeleteStudent","User",new {@id=item.ID})"><i class="fa fa-trash-o fa-2x" style="color: #808080;"></i></a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                }
+
+            </table>
+            <div id="page_list">
+                @Html.PagedListPager(Model,Page=>Url.Action("ListStudent",new {Page=Page }))
+            </div>
+        </div>
+    </div>
+</div>

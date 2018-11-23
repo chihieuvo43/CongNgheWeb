@@ -1,0 +1,49 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_Menu
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Menu")">danh sách danh mục</a></li>
+    <li class="breadcrumb-item active">Sửa danh mục <strong>@Model.MenuName</strong></li>
+</ol>
+<!--grid-->
+<div class="grid-form">
+    <div class="grid-form1">
+        <h2 id="forms-example" class="">Sửa danh mục</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <form>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MenuName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.MenuName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MenuName, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Icon, new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Icon, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Icon, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-danger m-t-20">Sửa danh mục</button>
+                    <a class="btn btn-primary m-t-20" href="@Url.Action("Index", "Menu")">
+                        Về danh sách
+                    </a>@ViewBag.Status
+                </div>
+
+            </form>
+        }
+    </div>
+</div>
+<!----->

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<CongNgheWeb_3_0.Models.tbl_Menu>
+<div class="MenuChild">
+
+    @foreach (var item in Model)
+    {
+        <a class="dropdown-item" href="#">@item.MenuName</a>
+        @*@Html.Action("MenuChild", "Home", new { ParentID = @item.ID })*@
+    }
+
+</div>
+@*<div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+    @foreach (var item in Model)
+    {
+       
+        <a class="dropdown-item" href="#">@item.MenuName</a>
+        
+        @Html.Action("MenuChild", "Home", new { ParentID = @item.ID })
+    }
+</div>*@

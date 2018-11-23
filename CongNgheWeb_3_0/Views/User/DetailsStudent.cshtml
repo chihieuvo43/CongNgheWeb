@@ -1,0 +1,74 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_User
+
+@{
+    ViewBag.Title = "DetailsStudent";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListStudent","User")">Danh sách học viên</a></li>
+    <li class="breadcrumb-item">Chi tiết học viên <strong>@Model.UserName</strong> </li>
+</ol>
+<!--grid-->
+<div class="agileinfo-grap text-center">
+    <div class="agileits-box">
+        <div class="agileits-box-body clearfix text-left m-4">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <img src="@Url.Content("~/Images/Students/"+Model.UserImage)" width="100px;" class="rounded-circle" />
+                    <p>
+                        @if (Model.Clock == true)
+                        {
+                            <span class="badge badge-pill badge-danger">Đã bị khóa</span>
+
+                        }
+                        else
+                        {
+                            <span class="badge badge-pill badge-primary">Đang hoạt động</span>
+                        }
+                    </p>
+                </div>
+            </div>
+            <div class="row text-center">
+
+                <div class="col-md-12">
+                    <h1 class="">@Html.DisplayFor(model => model.UserName)</h1>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <p>@Html.DisplayFor(model => model.Email)</p>
+                </div>
+            </div>
+
+            <div class="row text-center small">
+                <div class="col-md-12">
+                    <p><i class="fa fa-phone"></i> @Html.FormatValue(Model.NumberPhone, "{0:####-###-###}")</p>
+                </div>
+
+            </div>
+            <div class="row text-center">
+                <div class="col-md-6 small text-right">
+                    <p>30 khóa học <br />Đã đăng ký</p>
+                </div>
+                <div class="col-md-6 text-left">
+                    <button class="btn btn-primary btn-sm">Xem</button>
+                </div>
+
+            </div>
+            <hr />
+            <div class="row text-center">
+                <div class="col-md-12 text-center">
+                    <a class="btn btn-success" href="@Url.Action("ListStudent","User")">
+                        <i class="fa fa-mail-reply"></i> Danh sách học viên
+                    </a>
+                   
+                </div>
+
+            </div>
+           
+        </div>
+    </div>
+</div>

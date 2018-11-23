@@ -1,0 +1,128 @@
+﻿
+<style>
+    :root .carbonad,
+    :root #carbonads-container,
+    :root #content > #right > .dose > .dosesingle,
+    :root #content > #center > .dose > .dosesingle {
+        display: none !important;
+    }
+</style>
+<link href="~/Content/btr-menu.css" rel="stylesheet" />
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="@Url.Action("Index","Home")">
+        <img src="~/Images/logo.png" width="150px" />
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item dropdown active">
+                @*@Html.Action("PartilViewListCategory", "Category")*@
+                @Html.Action("_PartialMenuParent", "Home")
+            </li>
+            @* <li>
+            <a href="#">About</a>
+            <ul>
+                <li><a href="#">About sub 1</a></li>
+                <li>
+                    <a href="#">About sub 2</a>
+                    <ul>
+                        <li><a href="#">About sub 2-1</a></li>
+                        <li><a href="#">About sub 2-2</a></li>
+                        <li>
+                            <a href="#">About sub 2-3</a>
+                            <ul>
+                                <li><a href="#">About sub 2-3-1</a></li>
+                                <li><a href="#">About sub 2-3-2</a></li>
+                                <li><a href="#">About sub 2-3-3</a></li>
+                                <li><a href="#">About sub 2-3-4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">About sub 2-4</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">About sub 3</a></li>
+                <li><a href="#">About sub 4</a></li>
+            </ul>
+        </li>*@
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0  mr-auto">
+            <div class="input-group">
+                <input type="text" class="form-control " placeholder="Tìm kiếm">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="btn_search"><i class="fa fa-search"></i>  Tìm kiếm</span>
+                </div>
+            </div>
+        </form>
+        <ul class="navbar-nav ">
+            <li class="nav-item dropdown active pr-4" data-toggle="tooltip" data-placement="bottom" title="Giỏ hàng">
+                <i class="fa fa-shopping-cart fa-2x"></i>
+            </li>
+            <li class="nav-item dropdown active pr-4">
+                <div class="dropdown show">
+
+                    @if (Session["ID"] == null)
+                    {
+                        <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-sign-in"></i> Đăng nhập
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                            <a class="dropdown-item" href="@Url.Action("Login","Home")">Đăng nhập</a>
+                            <a class="dropdown-item" href="@Url.Action("Register","Home")">Tạo tài khoản</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user"></i> @Session["UserName"]
+                        </a>
+                        if (Convert.ToInt32(Session["Position"]) == 4)
+                        {
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                                <a class="dropdown-item" href="@Url.Action("","")">Khóa học của tôi</a>
+                                <a class="dropdown-item" href="@Url.Action("Logout","Home")">Đăng xuất</a>
+                            </div>
+                        }
+                        if (Convert.ToInt32(Session["Position"]) == 3)
+                        {
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="@Url.Action("","")">Khóa học của tôi</a>
+                                <a class="dropdown-item" href="@Url.Action("","")">Tạo khóa học</a>
+                                <a class="dropdown-item" href="@Url.Action("Logout","Home")">Đăng xuất</a>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+
+<style>
+    #btn_search:hover {
+        background-color: aqua;
+        cursor: pointer;
+    }
+
+    .starter-template {
+        padding: 40px 15px;
+        text-align: center;
+    }
+
+   
+</style>
+<script src="~/Scripts/btr-menu.js"></script>
+<script>
+		$(document).ready(function () {
+			$("#navbar").btrmenu();
+		});
+</script>

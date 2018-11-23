@@ -1,0 +1,103 @@
+﻿@using CongNgheWeb_3_0.Models;
+
+@using PagedList.Mvc
+@model PagedList.PagedList<tbl_Slide>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Slide")">Danh sách ảnh</a></li>
+</ol>
+<div class="agileinfo-grap">
+    <div class="agile-grids">
+        <div class="agile-tables">
+
+            <div class="w3l-table-info">
+                <h2>Danh sách ảnh</h2>
+                @ViewBag.Status
+                <br />
+                <a class="btn btn-danger" href="@Url.Action("Create", "Slide")"><i class="fa fa-plus"></i> Thêm ảnh</a>
+                <table id="table" class="table table-hover table-bordered" style="color:#000;">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().SildeImage)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().CreateDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Clock)
+                            </th>
+                            <th>Xóa</th>
+                        </tr>
+                       
+                    </thead>
+
+                    @{ int i = 0;}
+                    @{
+
+
+                        foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <td>
+                                    <img src="@Url.Content("~/Images/Slides/" + item.SildeImage)" width="50px" />
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreateDate)
+                                </td>
+
+                                <td>
+                                    @if (item.Clock == true)
+                                    {
+                                        <a href="@Url.Action("Clock", "Slide", new { item.ID })">
+                                            <span class="badge badge-primary">Khóa</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Clock", "Slide", new { item.ID })">
+                                            <span class="badge badge-danger">Đã khóa</span>
+                                        </a>
+
+                                    }
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("Delete", "Slide", new { @id = item.ID }))
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                    <a href="@Url.Action("Delete","Slide",new {@id=item.ID })">
+                                        <i class="fa fa-trash fa-2x" style="color:#e0111e"></i>
+                                    </a>
+                                       
+                                    }
+
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+                <div style="clear:both;"></div>
+                @*Tao link lien ket cac trang*@
+                @*Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount*@
+               
+                <div id="page_list">
+                    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+   

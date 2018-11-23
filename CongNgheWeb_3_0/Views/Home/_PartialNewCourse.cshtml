@@ -1,0 +1,65 @@
+﻿
+@using CongNgheWeb_3_0.Models;
+@model IEnumerable<tbl_Course>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-1 text-right">
+            <i class="fa fa-diamond fa-2x dot" style="background-color:#ff9900;"></i>
+        </div>
+        <div class="col-md-10">
+            <p style="font-size:30px;">Các khóa học mới nhất</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="card-deck">
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("DetailCourse","Home",new {@id=item.ID})">
+                    <div class="card" id="card">
+                        <img class="card-img-top" src="@Url.Content("~/Images/Courses/"+item.CourseImage) ">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.CourseName.Substring(0, 15)</h5>
+                            <p class="card-text">@item.tbl_User.UserName</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    @if (item.Pirce == null)
+                                    {
+                                        <span class="badge badge-info">Miễn phí</span>
+                                    }
+                                    else
+                                    {
+                                        @item.Pirce
+                                    }
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+            }
+        </div>
+    </div>
+</div>
+<style>
+    .dot {
+        color: #fff;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        line-height: 50px;
+    }
+
+    #card img {
+        width: 210px;
+        height: 200px;
+    }
+
+    #card {
+        width: 210px;
+        height: 300px;
+    }
+</style>
+

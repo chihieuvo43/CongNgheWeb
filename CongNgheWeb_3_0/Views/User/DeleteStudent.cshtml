@@ -1,0 +1,37 @@
+﻿@model CongNgheWeb_3_0.Models.tbl_User
+
+@{
+    ViewBag.Title = "DeleteStudent";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListStudent","User")">Danh sách học viên</a></li>
+    <li class="breadcrumb-item">Xóa học viên : @Model.UserName </li>
+</ol>
+
+<div class="agileinfo-grap text-center p-4">
+    <div class="agileits-box">
+        <header class="agileits-box-header clearfix">
+            <h3>Xóa học viên <strong>@Model.UserName</strong></h3>
+        </header>
+    </div>
+    <div>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+
+                <button type="submit" class="btn btn-danger"><i class="fa fa-remove"></i> Đồng ý</button>
+                <a class="btn btn-success" href="@Url.Action("ListStudent","User")">
+                    <i class="fa fa-mail-reply"></i> Danh sách học viên
+                </a>
+            </div>
+        }
+    </div>
+
+</div>
+       

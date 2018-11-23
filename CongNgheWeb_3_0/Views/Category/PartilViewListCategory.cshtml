@@ -1,0 +1,37 @@
+﻿
+@model IEnumerable<CongNgheWeb_3_0.Models.tbl_Category>
+
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fa fa-list-ul"></i> Danh mục khóa học
+</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+
+    @foreach (var item in Model)
+    {
+       
+        <a class="dropdown-item" href="#">
+            <div class="row">
+                @if (item.Deleted == false)
+                {
+                    <div class="col-1">
+                        @Html.Raw(item.Icon)
+                    </div>
+                    <div class="col-11">
+                        @item.CategoryName
+                            
+                    </div>
+                }
+
+            </div>
+       
+        </a>
+
+    }
+
+</div>
+<style>
+    .dropdown-menu {
+        min-width: 24rem;
+    }
+</style>

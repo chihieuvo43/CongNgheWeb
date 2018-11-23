@@ -1,0 +1,157 @@
+﻿@using CongNgheWeb_3_0.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<tbl_Course>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+
+<!--heder end here-->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Index","Course")">Các khóa học</a></li>
+</ol>
+<!--grid-->
+<!-- //tables -->
+
+<div class="agile-grids">
+    <div class="agile-tables">
+
+        <div class="w3l-table-info">
+            <h2>Danh sách các khóa học</h2>
+            <br />
+            <a class="btn btn-danger" href="@Url.Action("Create","Course")"><i class="fa fa-plus"></i> Thêm khóa học</a>
+            <table id="table" class="table table-hover table-bordered" style="color:#000;">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().CourseName)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Pirce)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Discount)
+                        </th>
+                        <th width="10%">
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().TotalView)
+                        </th>
+                        <th width="10%">
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().TotalStudents)
+                        </th>
+
+                        <th width="10%">
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().CreateDate)
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.FirstOrDefault().tbl_Category.CategoryName)*@
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().censored)
+                        </th>
+                        <th width="5%">Bài học</th>
+                        <th width="5%">Chi tiết</th>
+                        <th width="5%">Sửa</th>
+                        <th width="5%">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.CourseName.Length > 20)
+                                {
+                                    @item.CourseName.Substring(0, 20)
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.CourseName)
+                                }
+
+                            </td>
+
+                            <td>
+                                @if (item.Pirce == null)
+                                {
+                                    <span class="badge badge-success">Miễn phí</span>
+                                }
+                                else
+                                {
+                                    @Html.FormatValue(item.Pirce, "{0:0,0 VNĐ}")
+                                }
+                            </td>
+                            <td>
+                                @if (item.Discount == null)
+                                {
+                                    <span class="badge badge-success">Không</span>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Discount)
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalView)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalStudents)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDate)
+                            </td>
+                            <td>
+                                @*@Html.DisplayFor(modelItem => item.tbl_Category.CategoryName)*@
+                            </td>
+
+                            <td>
+                                @if (item.censored == true)
+                                {
+                                    <a href="@Url.Action("Censored", "Course", new {item.ID})">
+                                            <span class="badge badge-primary"><i class="fa fa-check fa-2x" style="color:#fff;"></i> Đã duyệt  </span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Censored", "Course", new {item.ID})">
+                                        <span class="badge badge-danger"><i class="fa fa-remove fa-2x" style="color:#fff;"></i> Chưa duyệt</span>
+                                    </a>
+
+                                }
+                            </td>
+                            <td>
+                               
+                                <a href="@Url.Action("Index","Lession",new {@id=item.ID})" class="btn btn-success btn-sm" style=" border-radius:5px;"><span class="badge badge-light">@item.tbl_Lession.Count()</span>  Bài học</a>
+                            </td>
+
+                            <td>
+                                <a href="@Url.Action("Details","Course",new {@id=item.ID})"><i class="fa fa-info-circle fa-2x" style="color: #808080;"></i></a>
+                            </td>
+
+                            <td>
+                                <a href="@Url.Action("Edit","Course",new {@id=item.ID}) " class="text-danger"><i class="fa fa-edit fa-2x" style="color: #808080;"></i></a>
+
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Delete","Course",new {@id=item.ID})"><i class="fa fa-trash-o fa-2x" style="color: #808080;"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div id="page_list">
+                @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

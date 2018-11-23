@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="E_ClassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Icon" Type="varchar" MaxLength="100" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_Course">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CourseImage" Type="nvarchar" MaxLength="255" />
+    <Property Name="Pirce" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="Discount" Type="decimal" Precision="19" Scale="4" />
+    <Property Name="TotalView" Type="int" />
+    <Property Name="TotalStudents" Type="int" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="censored" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="CourseDescription" Type="ntext" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="SortCourseID" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_Lession">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LessionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="URLLession" Type="text" />
+    <Property Name="TotalTime" Type="int" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_Menu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentID" Type="int" />
+    <Property Name="Icon" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_Position">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PositionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Poster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImagePoster" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Clock" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_Slide">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SildeImage" Type="nvarchar" MaxLength="100" />
+    <Property Name="Clock" Type="bit" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbl_Sort_Course">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="SortCourseName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbl_User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserImage" Type="varchar" MaxLength="100" />
+    <Property Name="LoginName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PasswordUser" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="DescriptionUser" Type="text" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="NumberPhone" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Clock" Type="bit" />
+    <Property Name="Position" Type="int" />
+    <Property Name="SendMail" Type="bit" />
+    <Property Name="Notificationed" Type="bit" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <Association Name="FK_Course_Menu">
+    <End Role="tbl_Menu" Type="Self.tbl_Menu" Multiplicity="0..1" />
+    <End Role="tbl_Course" Type="Self.tbl_Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Menu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Course">
+        <PropertyRef Name="SortCourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_User">
+    <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="0..1" />
+    <End Role="tbl_Course" Type="Self.tbl_Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Course">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lession_Course">
+    <End Role="tbl_Course" Type="Self.tbl_Course" Multiplicity="0..1" />
+    <End Role="tbl_Lession" Type="Self.tbl_Lession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Lession">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_SortCourse_Category">
+    <End Role="tbl_Category" Type="Self.tbl_Category" Multiplicity="0..1" />
+    <End Role="tbl_Sort_Course" Type="Self.tbl_Sort_Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbl_Sort_Course">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="E_ClassModelStoreContainer">
+    <EntitySet Name="tbl_Category" EntityType="Self.tbl_Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Course" EntityType="Self.tbl_Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Lession" EntityType="Self.tbl_Lession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Position" EntityType="Self.tbl_Position" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Poster" EntityType="Self.tbl_Poster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Slide" EntityType="Self.tbl_Slide" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Sort_Course" EntityType="Self.tbl_Sort_Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Course_Menu" Association="Self.FK_Course_Menu">
+      <End Role="tbl_Menu" EntitySet="tbl_Menu" />
+      <End Role="tbl_Course" EntitySet="tbl_Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_User" Association="Self.FK_Course_User">
+      <End Role="tbl_User" EntitySet="tbl_User" />
+      <End Role="tbl_Course" EntitySet="tbl_Course" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lession_Course" Association="Self.FK_Lession_Course">
+      <End Role="tbl_Course" EntitySet="tbl_Course" />
+      <End Role="tbl_Lession" EntitySet="tbl_Lession" />
+    </AssociationSet>
+    <AssociationSet Name="fk_SortCourse_Category" Association="Self.fk_SortCourse_Category">
+      <End Role="tbl_Category" EntitySet="tbl_Category" />
+      <End Role="tbl_Sort_Course" EntitySet="tbl_Sort_Course" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

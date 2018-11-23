@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CongNgheWeb_3_0.Models.tbl_Poster>
+
+<div class="jumbotron text-white" >
+    
+        @foreach (var item in Model)
+        {
+            <img id="PosterImage" src="@Url.Content("~/Images/Posters/"+item.ImagePoster)"/>
+
+        }
+        @*<h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
+        <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
+        <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>*@
+</div>
+
+<style>
+    .jumbotron {
+        padding: 0px 0px;
+        margin-bottom: 0px;
+    }
+    .container-fluid {
+        width: 100%;
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .jumbotron {
+        padding: 0px 0px;
+        margin-bottom: 0px;
+        
+    }
+    #PosterImage {
+        vertical-align: middle;
+        border-style: none;
+        width: 100%;
+    }
+</style>
+
+

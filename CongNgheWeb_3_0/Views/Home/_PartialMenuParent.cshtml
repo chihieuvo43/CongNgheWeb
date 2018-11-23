@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CongNgheWeb_3_0.Models.tbl_Menu>
+@{
+    ViewBag.Title = "MenuParent";
+}
+<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fa fa-list-ul"></i> Danh mục khóa học
+</a>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+
+    @foreach (var item in Model)
+    {
+        <div class="dropdown-item">
+            <div class="row">
+                <div class="col-2">@Html.Raw(item.Icon)</div>
+                <div class="col-8"> @item.MenuName</div>
+                <div class="col-2"><i class="fa fa-chevron-right" style="opacity:.5;"></i></div>
+            </div>
+           
+        </div>
+        @Html.Action("MenuChild", "Home", new { ParentID = @item.ID })
+    }
+
+</div>
+
+<style>
+    .dropdown-menu {
+        min-width: 14rem;
+        position:relative;
+        height:300px;
+    }
+    .MenuChild {
+        position: absolute;
+        left: 209px;
+        display: none;
+        background-color: #fff;
+        top: 0px;
+        height: 300px;
+        border-radius: 5px;
+        box-shadow: -3px 0px 28px -10px rgba(74,72,74,0.48);
+        width: 300px;
+    }
+    .dropdown-item > .MenuChild {
+        position: absolute;
+        top: 0px;
+        left: 200px;
+        display: none;
+       
+    }
+    .dropdown-item:hover + .MenuChild{
+        display: block;
+    }
+    .MenuChild:hover {
+        display: block;
+    }
+   
+</style>
+
